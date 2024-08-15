@@ -11,14 +11,15 @@ import com.example.projectconnectandroid.databinding.ActivityMainBinding;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import controller.DeviceController;
-import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private DeviceController deviceController;
+    private static final Logger logger = Logger.getLogger(MainActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 deviceController.setupTcpConnection(deviceIP);
                 return true;
             } catch (IOException e) {
-                Timber.tag("MainActivity").e(e, "Failed to connect to device B: %s", e.getMessage());
+                logger.severe("Failed to connect to device B: " + e.getMessage());
                 return false;
             }
         }
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     deviceController.startApplicationOnDeviceB();
                     return true;
                 } catch (IOException e) {
-                    Timber.tag("MainActivity").e(e, "Failed to start app on device B: %s", e.getMessage());
+                    logger.severe("Failed to start app on device B: " + e.getMessage());
                     return false;
                 }
             }
@@ -102,9 +103,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean success) {
             super.onPostExecute(success);
             if (success) {
-                Toast.makeText(MainActivity.this, "App started on device B", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The command is executed!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(MainActivity.this, "Failed to start app", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Failed to start app =(", Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -55,7 +55,7 @@ public class DeviceController {
     }
 
     public void startApplicationOnDeviceB() throws IOException {
-        String command = "input text \"" + "DA NY NAXUY TEKST SAM VVODITSA ?!" + "\"";
+        String command = "input text \"" + "HELLO WORLD!!" + "\""; //Команда для устрйоства B
         executeShellCommand(command);
         logger.info("Сигнал отправлен на устройство B.");
     }
